@@ -51,9 +51,15 @@ CANDIDATES is the list of candidates."
                    (let ((icon (if (and (buffer-file-name) (icons-in-terminal-auto-mode-match?))
                                    (cond
                                     ((f-dir? (buffer-file-name)) (icons-in-terminal-helm-for-dir (buffer-file-name)))
-                                    ((icons-in-terminal-icon-for-file (file-name-nondirectory (buffer-file-name))
-                                                                      :height 1.0
-                                                                      :v-adjust 0.0)))
+                                    ((condition-case err
+                                      (icons-in-terminal-icon-for-file (file-name-nondirectory (buffer-file-name))
+                                                                       :height 1.0
+                                                                       :v-adjust 0.0)
+                                      (error (message (cadr err))
+                                             (icons-in-terminal-faicon "file-o"
+                                                                       :face 'icons-in-terminal-dsilver
+                                                                       :height 0.9
+                                                                       :v-adjust 0.0)))))
                                  (icons-in-terminal-icon-for-mode major-mode
                                                                   :height 1.0
                                                                   :v-adjust 0.0))))
@@ -77,9 +83,15 @@ CANDIDATES is the list of candidates."
                                          (cons candidate candidate))]
             (cons (concat (cond
                            ((f-dir? file-name) (icons-in-terminal-helm-for-dir file-name))
-                           ((icons-in-terminal-icon-for-file (file-name-nondirectory file-name)
-                                                             :height 1.0
-                                                             :v-adjust 0.0)))
+                           ((condition-case err
+                                (icons-in-terminal-icon-for-file (file-name-nondirectory file-name)
+                                                                 :height 1.0
+                                                                 :v-adjust 0.0)
+                              (error (message (cadr err))
+                                     (icons-in-terminal-faicon "file-o"
+                                                               :face 'icons-in-terminal-dsilver
+                                                               :height 0.9
+                                                               :v-adjust 0.0)))))
                           "  "
                           display)
                   file-name)))
