@@ -55,7 +55,7 @@ CANDIDATES is the list of candidates."
                                       (icons-in-terminal-icon-for-file (file-name-nondirectory (buffer-file-name))
                                                                        :height 1.0
                                                                        :v-adjust 0.0)
-                                      (error (message (cadr err))
+                                      (error (let ((inhibit-message t)) (message (cadr err)))
                                              (icons-in-terminal-faicon "file-o"
                                                                        :face 'icons-in-terminal-dsilver
                                                                        :height 0.9
@@ -87,7 +87,7 @@ CANDIDATES is the list of candidates."
                                 (icons-in-terminal-icon-for-file (file-name-nondirectory file-name)
                                                                  :height 1.0
                                                                  :v-adjust 0.0)
-                              (error (message (cadr err))
+                              (error (let ((inhibit-message t)) (message (cadr err)))
                                      (icons-in-terminal-faicon "file-o"
                                                                :face 'icons-in-terminal-dsilver
                                                                :height 0.9
