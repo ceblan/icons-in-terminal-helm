@@ -29,6 +29,8 @@
 ;;; Code:
 
 (require 'dash)
+(add-to-list 'load-path "~/.local/share/icons-in-terminal/")
+;; (load-file "~/.local/share/icons-in-terminal/icons-in-terminal.el")
 (require 'icons-in-terminal)
 (require 's)
 
